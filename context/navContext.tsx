@@ -8,10 +8,11 @@ export function useNav() {
 
 export function NavProvider({ children }: any) {
    const [currentUser, setCurrentUser] = useState<any>();
-   const [showSearchInput, setShowSearchInput] = useState(true);
+   const [showSearchInput, setShowSearchInput] = useState(false);
    const [showSideBar, setShowSideBar] = useState(false);
    const [showDropdown, setShowDropdown] = useState(false);
    const navRef = useRef(null);
+   const accIconRef = useRef(null);
 
    const value = {
       setCurrentUser,
@@ -23,6 +24,7 @@ export function NavProvider({ children }: any) {
       setShowDropdown,
       showDropdown,
       navRef,
+      accIconRef,
    };
 
    return <NavContext.Provider value={value}>{children}</NavContext.Provider>;

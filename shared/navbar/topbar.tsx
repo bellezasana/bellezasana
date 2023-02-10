@@ -7,8 +7,17 @@ import ShoppingCart from "./cart";
 import Searchbar from "./searchbar";
 
 function Topbar() {
-   const { showSideBar, setShowSideBar, navRef } = useNav();
+   const {
+      showSideBar,
+      setShowSideBar,
+      navRef,
+      setShowSearchInput,
+      showSearchInput,
+   } = useNav();
+
    const toggleSidebar = () => setShowSideBar((show: boolean) => !show);
+   // const toggleSearch = () => setShowSearchInput((show: boolean) => !show);
+
    return (
       <div
          ref={navRef}
@@ -23,8 +32,10 @@ function Topbar() {
             onClick={toggleSidebar}
          />
          <Searchbar />
-         <ShoppingCart />
-         <Account />
+         <div className={`${showSearchInput ? "hidden" : "flex"} sm:flex`}>
+            <ShoppingCart />
+            <Account />
+         </div>
       </div>
    );
 }

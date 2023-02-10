@@ -6,11 +6,12 @@ import { useNav } from "@/context/navContext";
 
 function AccIcon() {
    const { currentUser } = useAuth();
-   const { setShowDropdown } = useNav();
+   const { setShowDropdown, accIconRef } = useNav();
    const toggleShowDropdown = () => setShowDropdown((show: boolean) => !show);
 
    return (
       <span
+         ref={accIconRef}
          onClick={toggleShowDropdown}
          className="flex aspect-square ml-1 mr-4 bg-white rounded-full drop-shadow-md h-[2.5rem] items-center justify-center cursor-pointer hover:drop-shadow-lg"
       >

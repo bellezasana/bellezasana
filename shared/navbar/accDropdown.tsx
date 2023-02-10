@@ -19,10 +19,10 @@ const dropdownItems = [
 ];
 
 function AccDropdown() {
-   const { setShowDropdown } = useNav();
+   const { setShowDropdown, accIconRef } = useNav();
    const dropRef = useRef<HTMLDivElement>(null);
 
-   useClickOutside(dropRef, () => setShowDropdown(false));
+   useClickOutside([dropRef, accIconRef], () => setShowDropdown(false));
    return (
       <div
          ref={dropRef}
