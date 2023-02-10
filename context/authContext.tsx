@@ -1,11 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {
    createUserWithEmailAndPassword,
+   deleteUser,
    signInWithEmailAndPassword,
    signInWithPopup,
    signOut,
+   updateProfile,
 } from "firebase/auth";
-import { auth, googleProvider } from "@/utils/firebaseConfig";
+import { auth, db, googleProvider } from "@/utils/firebaseConfig";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext<any>(null);
 
@@ -22,9 +25,20 @@ export function AuthProvider({ children }: any) {
       await signInWithPopup(auth, googleProvider);
    }
 
-   async function createUserWithEmail(email: string, password: string) {
+   async function createUserWithEmail(
+      email: string,
+      password: string,
+      name: string
+   ) {
       try {
          await createUserWithEmailAndPassword(auth, email, password);
+         console.log(auth.currentUser);
+
+         if (!auth.currentUser) return;
+
+         await updateProfile(auth.currentUser, {
+            displayName: name,
+         });
       } catch (error: any) {
          console.log(error);
 
@@ -44,6 +58,21 @@ export function AuthProvider({ children }: any) {
 
    async function logout() {
       await signOut(auth);
+   }
+
+   async function setUserDoc() {
+      const userRef = doc(db, "users", currentUser.uid);
+
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) return;
+
+      await setDoc(userRef, {
+         name: currentUser.displayName || "",
+         email: currentUser.email,
+         photoURL: currentUser.photoURL,
+         lastSeen: serverTimestamp(),
+      });
    }
 
    useEffect(() => {

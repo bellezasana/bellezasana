@@ -4,6 +4,31 @@
 @tailwind components;
 @tailwind utilities;
 
+.inputBox {
+   width: 90%;
+   margin: auto;
+}
+.inputBox input {
+   width: 100%;
+   display: flex;
+   cursor: pointer;
+   border-radius: 2px;
+   padding: 5px;
+   margin: auto;
+   outline: none;
+   border-top: none;
+   border-right: none;
+   border-left: none;
+   border-color: #a9d1ff;
+   border-width: 1px;
+}
+.inputBox input:hover {
+   border-width: 2px;
+}
+.inputBox label {
+   font-size: 0.9rem;
+}
+
 .settings:last-child {
    position: absolute;
    top: 100%;

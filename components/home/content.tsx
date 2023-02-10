@@ -6,10 +6,10 @@ import EachPurchase from "./eachPurchase";
 
 function HomeContent() {
    return (
-      <div className="flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll">
-         <Banner />
-         <EachPurchase />
+      <div className="flex flex-col items-center w-full mt-16 overflow-x-hidden overflow-y-scroll">
          <Products />
+         <EachPurchase />
+         <Banner />
          <Footer />
       </div>
    );

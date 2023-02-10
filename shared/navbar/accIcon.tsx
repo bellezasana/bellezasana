@@ -13,7 +13,7 @@ function AccIcon() {
       <span
          ref={accIconRef}
          onClick={toggleShowDropdown}
-         className="flex aspect-square ml-1 mr-4 bg-white rounded-full drop-shadow-md h-[2.5rem] items-center justify-center cursor-pointer hover:drop-shadow-lg"
+         className="flex aspect-square ml-1 mr-4 bg-white rounded-full drop-shadow-md h-[2.5rem] items-center justify-center cursor-pointer hover:drop-shadow-lg overflow-hidden"
       >
          {currentUser?.photoURL ? (
             <span className="relative flex w-full aspect-square">

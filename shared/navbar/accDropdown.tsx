@@ -14,15 +14,18 @@ const dropdownItems = [
    {
       text: "Cerrar Sesion",
       icon: <LogoutIcon />,
-      link: "/logout",
+      link: "/auth/logout",
    },
 ];
 
 function AccDropdown() {
    const { setShowDropdown, accIconRef } = useNav();
+
    const dropRef = useRef<HTMLDivElement>(null);
 
-   useClickOutside([dropRef, accIconRef], () => setShowDropdown(false));
+   const closeDropdown = () => setShowDropdown(false);
+
+   useClickOutside([dropRef, accIconRef], closeDropdown);
    return (
       <div
          ref={dropRef}
@@ -32,6 +35,7 @@ function AccDropdown() {
             {dropdownItems.map((item) => (
                <li
                   key={item.text}
+                  onClick={closeDropdown}
                   className="flex items-center hover:bg-[#f5f5f5] px-2"
                >
                   <span className="text-gray-700">{item.icon}</span>

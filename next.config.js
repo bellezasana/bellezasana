@@ -4,6 +4,14 @@ const nextConfig = {
       locales: ["es"],
       defaultLocale: "es",
    },
+   images: {
+      remotePatterns: [
+         {
+            protocol: "https",
+            hostname: "**.googleusercontent.com",
+         },
+      ],
+   },
 };
 
 module.exports = nextConfig;
