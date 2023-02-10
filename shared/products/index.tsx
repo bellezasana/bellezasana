@@ -28,7 +28,7 @@ const products = [
 function Products() {
    return (
       <div className="flex justify-center w-full my-2">
-         <div className="flex flex-wrap max-w-5xl justify-evenly">
+         <div className="flex flex-wrap justify-center w-full mx-auto">
             {products.map((product) => (
                <Card key={product.id} product={product} />
             ))}

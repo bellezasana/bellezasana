@@ -3,12 +3,12 @@ import React from "react";
 
 function Banner() {
    return (
-      <div className="w-full h-[100vh] flex justify-center items-center">
-         <div className="bg-white drop-shadow-md p-8">
-            <span className="relative flex aspect-[24/9] w-[80vw] max-w-sm">
+      <div className="flex items-center justify-center w-full min-h-[100vh] my-14">
+         <div className="p-8 bg-white drop-shadow-md">
+            <span className="relative flex aspect-[24/9] w-full max-w-sm">
                <Image src="/BellezaSanaBannerCropped.png" alt="" fill />
             </span>
-            <p className="font-bold text-xl text-center mt-2">
+            <p className="mt-2 text-xl font-bold text-center">
                BELLA POR DENTRO Y POR FUERA
             </p>
          </div>

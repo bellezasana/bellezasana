@@ -13,11 +13,11 @@ interface CardProps {
 
 function Card({ product }: CardProps) {
    return (
-      <div className="relative flex aspect-square w-[20rem] m-2">
-         <span className="relative aspect-square w-full flex">
+      <div className="relative flex aspect-square w-[80vw] sm:w-[45vw] md:w-[20vw] m-2">
+         <span className="relative flex w-full aspect-square">
             <Image src={product.photoURL} alt="" fill />
          </span>
-         <p className="font-bold absolute bottom-4 w-full text-center">
+         <p className="absolute w-full font-bold text-center bottom-4">
             {product.name}
          </p>
       </div>
