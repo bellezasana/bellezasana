@@ -2,16 +2,19 @@ import { useAuth } from "@/context/authContext";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 function VuelvePronto() {
    const { logout } = useAuth();
+   const router = useRouter();
    useEffect(() => {
       const cerrarsesion = async () => {
          await logout();
+         router.push("/");
       };
       cerrarsesion();
-   }, [logout]);
+   }, [logout, router]);
 
    return (
       <div className="min-h-[100vh] h-full  flex flex-col items-center bg-[#f5f5f5]">

@@ -22,7 +22,12 @@ export function AuthProvider({ children }: any) {
    const [loaded, setLoaded] = useState(false);
 
    async function loginWithGoogle() {
-      await signInWithPopup(auth, googleProvider);
+      try {
+         await signInWithPopup(auth, googleProvider);
+      } catch (error) {
+         console.error(error);
+         return error;
+      }
    }
 
    async function createUserWithEmail(
