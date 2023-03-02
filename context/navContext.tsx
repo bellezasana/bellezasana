@@ -7,16 +7,18 @@ export function useNav() {
 }
 
 export function NavProvider({ children }: any) {
-   const [currentUser, setCurrentUser] = useState<any>();
    const [showSearchInput, setShowSearchInput] = useState(false);
    const [showSideBar, setShowSideBar] = useState(false);
    const [showDropdown, setShowDropdown] = useState(false);
+   const [showCartAlert, setShowCartAlert] = useState(false);
+   // const [checkoutSession, setCheckoutSession] = useState();
    const navRef = useRef(null);
    const accIconRef = useRef(null);
+   const cartIconRef = useRef(null);
 
    const value = {
-      setCurrentUser,
-      currentUser,
+      setShowCartAlert,
+      showCartAlert,
       setShowSearchInput,
       showSearchInput,
       setShowSideBar,
@@ -25,6 +27,9 @@ export function NavProvider({ children }: any) {
       showDropdown,
       navRef,
       accIconRef,
+      cartIconRef,
+      // setCheckoutSession,
+      // checkoutSession,
    };
 
    return <NavContext.Provider value={value}>{children}</NavContext.Provider>;

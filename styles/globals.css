@@ -4,6 +4,42 @@
 @tailwind components;
 @tailwind utilities;
 
+.authInputBox {
+   width: 90%;
+   margin: auto;
+   position: relative;
+   margin-block: 0.5rem;
+}
+.authInputBox input {
+   width: 100%;
+   display: flex;
+   cursor: pointer;
+   border-radius: 2px;
+   padding: 0.5rem;
+   margin: auto;
+   outline: none;
+   border-color: #a9d1ff;
+   border-width: 2px;
+}
+
+.authInputBox label {
+   position: absolute;
+   top: -0.25rem;
+   left: 0.5rem;
+   transform: translate(0, 50%);
+   padding: 0.1rem;
+   font-size: 16px;
+   pointer-events: none;
+   transition: 0.3s;
+   height: fit-content;
+   z-index: 100;
+}
+.authInputBox input:focus ~ label,
+.authInputBox input:not([value=""]) ~ label {
+   transform: translate(0, -50%);
+   color: #03a9f4;
+   background-color: white;
+}
 .inputBox {
    width: 90%;
    margin: auto;

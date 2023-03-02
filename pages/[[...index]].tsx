@@ -1,5 +1,10 @@
+import Banner from "@/components/home/banner";
 import HomeContent from "@/components/home/content";
+import EachPurchase from "@/components/home/eachPurchase";
+import Footer from "@/shared/footer";
+import Layout from "@/shared/layout";
 import Navbar from "@/shared/navbar";
+import Products from "@/shared/products";
 import Sidebar from "@/shared/sidebar";
 import Head from "next/head";
 
@@ -15,11 +20,11 @@ export default function Home() {
             />
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <Navbar />
-         <div className="flex w-full h-[100vh] overflow-hidden">
-            <Sidebar />
-            <HomeContent />
-         </div>
+         <Layout>
+            <Products />
+            <EachPurchase />
+            <Banner />
+         </Layout>
       </div>
    );
 }

@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useAuth } from "@/context/authContext";
-
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/authContext";
 interface WithAuthProps {
    children: JSX.Element;
 }
@@ -13,14 +12,12 @@ const WithAuth = ({ children }: WithAuthProps) => {
    useEffect(() => {
       if (currentUser) return;
 
-      router.push("/auth/login");
+      let url = `/auth/login?src=${encodeURIComponent(router.asPath)}`;
+
+      router.push(url);
    }, [router, currentUser]);
 
-   if (!currentUser) {
-      return <></>;
-   }
-
-   return children;
+   return currentUser && children;
 };
 
 export default WithAuth;

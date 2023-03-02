@@ -9,6 +9,17 @@ import {
 } from "firebase/auth";
 import { auth, db, googleProvider } from "@/utils/firebaseConfig";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+   createCustomer,
+   customerAccessTokenCreate,
+   getCustomerAccessToken,
+} from "@/utils/shopifyMutations";
+import { shopifyAPI } from "@/utils/shopifyAPI";
+import {
+   checkoutQuery,
+   customerQuery,
+   getCheckoutSession,
+} from "@/utils/shopifyQueries";
 
 const AuthContext = createContext<any>(null);
 
@@ -20,6 +31,8 @@ export function AuthProvider({ children }: any) {
    const [currentUser, setCurrentUser] = useState<any>();
    const [user, setUser] = useState();
    const [loaded, setLoaded] = useState(false);
+   const [accessToken, setAccessToken] = useState("");
+   const [checkoutSession, setCheckoutSession] = useState();
 
    async function loginWithGoogle() {
       try {
@@ -44,6 +57,8 @@ export function AuthProvider({ children }: any) {
          await updateProfile(auth.currentUser, {
             displayName: name,
          });
+
+         await createCustomer(email, auth.currentUser.uid);
       } catch (error: any) {
          console.log(error);
 
@@ -63,6 +78,12 @@ export function AuthProvider({ children }: any) {
 
    async function logout() {
       await signOut(auth);
+      setAccessToken("");
+   }
+
+   async function updateCheckoutSession() {
+      const session = await getCheckoutSession(accessToken);
+      setCheckoutSession(session);
    }
 
    async function setUserDoc() {
@@ -88,6 +109,19 @@ export function AuthProvider({ children }: any) {
       return unSubscribe;
    }, []);
 
+   useEffect(() => {
+      if (!currentUser) return;
+
+      const loadCustomerAccessToken = async () => {
+         const shopifyAccessToken = await getCustomerAccessToken(
+            currentUser.email!,
+            currentUser.uid
+         );
+         setAccessToken(shopifyAccessToken || "");
+      };
+      loadCustomerAccessToken();
+   }, [currentUser]);
+
    const value = {
       setCurrentUser,
       currentUser,
@@ -95,8 +129,13 @@ export function AuthProvider({ children }: any) {
       createUserWithEmail,
       signInWithEmail,
       logout,
+      accessToken,
+      setAccessToken,
       user,
       setUser,
+      checkoutSession,
+      setCheckoutSession,
+      updateCheckoutSession,
    };
 
    return (
