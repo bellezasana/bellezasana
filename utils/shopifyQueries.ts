@@ -1,4 +1,5 @@
 import { shopifyAPI } from "./shopifyAPI";
+import { checkoutCreate } from "./shopifyMutations";
 
 export const customerQuery = (access_token: string) => {
    return `customer(customerAccessToken: "${access_token}") {
@@ -169,9 +170,16 @@ export const getCheckoutSession = async (customerAccessToken: string) => {
    const customerResponse = await shopifyAPI(
       customerQuery(customerAccessToken)
    );
-   const checkoutId =
+   let checkoutId =
       customerResponse?.data?.customer?.lastIncompleteCheckout?.id;
-   if (!checkoutId) return;
+   if (!checkoutId) {
+      const checkoutResponse = await shopifyAPI(
+         checkoutCreate(customerResponse?.data?.customer?.email),
+         true
+      );
+
+      checkoutId = checkoutResponse?.data?.checkoutCreate?.checkout?.id;
+   }
    const checkoutResponse = await shopifyAPI(checkoutQuery(checkoutId));
 
    const checkoutNode = checkoutResponse?.data?.node;
@@ -179,4 +187,94 @@ export const getCheckoutSession = async (customerAccessToken: string) => {
    if (!checkoutNode) return;
 
    return checkoutNode;
+};
+
+export const ordersQuery = (customerAccessToken: string) => {
+   return `
+    customer(customerAccessToken: "${customerAccessToken}") {
+      orders(first: 10) {
+        edges {
+          node {
+            id
+            name
+            totalPriceV2 {
+              amount
+              currencyCode
+            }
+            processedAt
+            lineItems(first: 10) {
+              edges {
+                node {
+                  id
+                  title
+                  variant {
+                    product {
+                      handle
+                    }
+                    id
+                    title
+                    image {
+                      src
+                    }
+                    priceV2 {
+                      amount
+                      currencyCode
+                    }
+                    unitPrice {
+                      amount
+                      currencyCode
+                    }
+                    availableForSale
+                  }
+                  quantity
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+};
+
+export const searchProductsQuery = (query: string) => {
+   return `
+    products(first: 10, query: "${query}") {
+      edges {
+        node {
+          id
+          featuredImage {
+            src
+          }
+          availableForSale
+          handle
+          variants(first: 10) {
+            edges {
+              cursor
+              node {
+                id
+              }
+            }
+          }
+          priceRange {
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+        }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        hasPreviousPage
+        hasNextPage
+        startCursor
+      }
+    }
+  `;
 };

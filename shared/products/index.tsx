@@ -1,26 +1,20 @@
+import { useNav } from "@/context/navContext";
 import { shopifyAPI } from "@/utils/shopifyAPI";
-import { productsQuery } from "@/utils/shopifyQueries";
+import { productsQuery, searchProductsQuery } from "@/utils/shopifyQueries";
 import React, { useEffect, useState } from "react";
 import Card from "./card";
 const test =
    "gid://shopify/Checkout/dca7b6dafc6ccaea10323cc51873c27f?key=5c25be12528a7772557510c0293baf3c";
 function Products() {
-   const [products, setProducts] = useState<any>();
+   const { products, setProducts, setSearchInput, searchInput } = useNav();
    useEffect(() => {
       const fetchProducts = async () => {
-         const query = productsQuery();
-         const eproducts = await shopifyAPI(query);
-         // console.log(eproducts);
+         const eproducts = await shopifyAPI(searchProductsQuery(searchInput));
 
-         // const response = await shopifyAPI(mutation);
-         // console.log(response);
-
-         // console.log(eproducts);
          setProducts(eproducts.data.products.edges);
-         // console.log(eproducts.data.products.edges);
       };
       fetchProducts();
-   }, []);
+   }, [searchInput, setProducts]);
 
    return (
       <div className="flex justify-center w-full my-2">

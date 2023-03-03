@@ -11,6 +11,8 @@ export function NavProvider({ children }: any) {
    const [showSideBar, setShowSideBar] = useState(false);
    const [showDropdown, setShowDropdown] = useState(false);
    const [showCartAlert, setShowCartAlert] = useState(false);
+   const [products, setProducts] = useState();
+   const [searchInput, setSearchInput] = useState("");
    // const [checkoutSession, setCheckoutSession] = useState();
    const navRef = useRef(null);
    const accIconRef = useRef(null);
@@ -28,6 +30,10 @@ export function NavProvider({ children }: any) {
       navRef,
       accIconRef,
       cartIconRef,
+      setProducts,
+      products,
+      setSearchInput,
+      searchInput,
       // setCheckoutSession,
       // checkoutSession,
    };

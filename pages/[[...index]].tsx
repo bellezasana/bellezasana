@@ -21,9 +21,9 @@ export default function Home() {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <Layout>
-            <Products />
-            <EachPurchase />
             <Banner />
+            <EachPurchase />
+            <Products />
          </Layout>
       </div>
    );

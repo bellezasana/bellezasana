@@ -10,7 +10,7 @@ interface AddToCartProps {
 }
 
 function AddToCart({ productId, quantity = 1 }: AddToCartProps) {
-   const { checkoutSession, currentUser, setCheckoutSession, accessToken } =
+   const { checkoutSession, currentUser, updateCheckoutSession, accessToken } =
       useAuth();
    const router = useRouter();
    const [loading, setLoading] = useState(false);
@@ -22,17 +22,23 @@ function AddToCart({ productId, quantity = 1 }: AddToCartProps) {
          router.push(url);
          return;
       }
-      setLoading(true);
+      // setLoading(true);
       // console.log(checkoutSession.id, productId, quantity, currentUser.email);
 
-      const response = await addProductToCheckout(
+      // console.log(accessToken);
+
+      if (!checkoutSession) {
+         await updateCheckoutSession();
+      }
+
+      await addProductToCheckout(
          checkoutSession.id,
          productId,
          quantity,
          currentUser.email
       );
 
-      setCheckoutSession(await getCheckoutSession(accessToken));
+      await updateCheckoutSession();
       setLoading(false);
       // console.log(response);
    };

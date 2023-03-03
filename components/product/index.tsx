@@ -67,8 +67,14 @@ function ProductContent({ product }: any) {
             <div className="w-full p-8">
                <p className="text-xl font-semibold ">{product.title}</p>
                <span className="flex gap-1">
-                  <p>$</p>
-                  <p>{product.priceRange.maxVariantPrice.amount}</p>
+                  <p>
+                     {Number(
+                        product.priceRange.maxVariantPrice.amount
+                     ).toLocaleString("es-CO", {
+                        style: "currency",
+                        currency: "COP",
+                     })}
+                  </p>
                   <p>{product.priceRange.maxVariantPrice.currencyCode}</p>
                </span>
                <p className="mt-8 text-[.8rem] max-h-[50vh] overflow-y-scroll">
@@ -77,25 +83,33 @@ function ProductContent({ product }: any) {
                {showButton ? (
                   <AddToCart productId={product.variants.edges[0]?.node.id} />
                ) : (
-                  <span className="flex items-center px-3 mt-4 ml-4 mr-2 bg-white rounded drop-shadow-md w-fit">
+                  <div className="flex items-center mt-4">
+                     <span className="flex items-center px-3 ml-4 mr-2 bg-white rounded drop-shadow-md w-fit">
+                        <button
+                           className={`text-2xl font-bold ${
+                              loading ? "text-gray-600" : "text-blue-400"
+                           }  `}
+                           onClick={decreaseQuantity}
+                        >
+                           -
+                        </button>
+                        <p className="mx-2"> {productQuantity} </p>
+                        <button
+                           className={`text-2xl font-bold ${
+                              loading ? "text-gray-600" : "text-blue-400"
+                           }  `}
+                           onClick={increaseQuantity}
+                        >
+                           +
+                        </button>
+                     </span>
                      <button
-                        className={`text-2xl font-bold ${
-                           loading ? "text-gray-600" : "text-blue-400"
-                        }  `}
-                        onClick={decreaseQuantity}
+                        onClick={async () => await updateQuantity(0)}
+                        className="px-3 py-1 rounded bg-beige"
                      >
-                        -
+                        Quitar del carrito
                      </button>
-                     <p className="mx-2"> {productQuantity} </p>
-                     <button
-                        className={`text-2xl font-bold ${
-                           loading ? "text-gray-600" : "text-blue-400"
-                        }  `}
-                        onClick={increaseQuantity}
-                     >
-                        +
-                     </button>
-                  </span>
+                  </div>
                )}
             </div>
          </div>

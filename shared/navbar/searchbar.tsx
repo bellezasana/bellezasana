@@ -4,7 +4,8 @@ import { useNav } from "@/context/navContext";
 import { useClickOutside } from "@/utils/useClickOutside";
 
 function Searchbar() {
-   const { setShowSearchInput, showSearchInput } = useNav();
+   const { setShowSearchInput, showSearchInput, setSearchInput, searchInput } =
+      useNav();
    const searchRef = useRef<HTMLDivElement>(null);
 
    const toggle = () => setShowSearchInput((show: boolean) => !show);
@@ -23,6 +24,8 @@ function Searchbar() {
                showSearchInput ? "" : "hidden"
             }  h-full py-3 outline-none w-fit sm:w-full sm:flex text-[min(16px_1rem)]`}
             type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Buscar"
          />
       </div>
