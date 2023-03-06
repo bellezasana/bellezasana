@@ -37,6 +37,7 @@ export const productsQuery = () => {
     edges {
       node {
         id
+        title
         featuredImage {
           src
         }
@@ -205,7 +206,7 @@ export const ordersQuery = (customerAccessToken: string) => {
             lineItems(first: 10) {
               edges {
                 node {
-                  id
+                  
                   title
                   variant {
                     product {
@@ -236,6 +237,133 @@ export const ordersQuery = (customerAccessToken: string) => {
     }
   `;
 };
+export const ordersWithPaginationQuery = (
+   customerAccessToken: string,
+   cursor: string
+) => {
+   return `
+      customer(customerAccessToken: "${customerAccessToken}") {
+        orders(first: 10, after: "${cursor}") {
+          totalCount
+          edges {
+            node {
+              id
+              name
+              totalPriceV2 {
+                amount
+                currencyCode
+              }
+              processedAt
+              lineItems(first: 10) {
+                edges {
+                  node {
+                    
+                    title
+                    variant {
+                      product {
+                        handle
+                      }
+                      id
+                      title
+                      image {
+                        src
+                      }
+                      priceV2 {
+                        amount
+                        currencyCode
+                      }
+                      unitPrice {
+                        amount
+                        currencyCode
+                      }
+                      availableForSale
+                    }
+                    quantity
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+};
+export const ordersQueryWithCursorNoLineItems = (
+   customerAccessToken: string
+   //  cursor: string
+) => {
+   return `
+      customer(customerAccessToken: "${customerAccessToken}") {
+        orders(first: 10) {
+          totalCount
+          edges {
+            node {
+              orderNumber
+              fulfillmentStatus
+              id
+              name
+              totalPriceV2 {
+                amount
+                currencyCode
+              }
+              processedAt
+              
+            }
+          }
+        }
+      }
+    `;
+};
+
+export const getOrderByNumber = (
+   customerAccessToken: string,
+   orderNumber: string
+) => {
+   return `
+    customer(customerAccessToken: "${customerAccessToken}") {
+      orders(first: 1, query: "${orderNumber}") {
+        totalCount
+        edges {
+          node {
+            id
+            name
+            totalPriceV2 {
+              amount
+              currencyCode
+            }
+            processedAt
+            lineItems(first: 10) {
+              edges {
+                node {
+                  
+                  title
+                  variant {
+                    product {
+                      handle
+                    }
+                    id
+                    title
+                    image {
+                      src
+                    }
+                    priceV2 {
+                      amount
+                      currencyCode
+                    }
+                    unitPrice {
+                      amount
+                      currencyCode
+                    }
+                    availableForSale
+                  }
+                  quantity
+                }
+              }
+            }
+          }
+      }
+    }`;
+};
 
 export const searchProductsQuery = (query: string) => {
    return `
@@ -243,6 +371,7 @@ export const searchProductsQuery = (query: string) => {
       edges {
         node {
           id
+          title
           featuredImage {
             src
           }

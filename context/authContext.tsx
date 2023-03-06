@@ -118,6 +118,7 @@ export function AuthProvider({ children }: any) {
             currentUser.uid
          );
          setAccessToken(shopifyAccessToken || "");
+         if (!shopifyAccessToken) return;
       };
       loadCustomerAccessToken();
    }, [currentUser]);

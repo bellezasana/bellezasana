@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import SidebarItem from "./sidebarItem";
 import { useNav } from "@/context/navContext";
 import { useClickOutside } from "@/utils/useClickOutside";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const navbarItems = [
    {
@@ -20,9 +21,9 @@ const navbarItems = [
       icon: <ShoppingBasketIcon />,
    },
    {
-      href: "/configuracion",
-      text: "Configuración",
-      icon: <SettingsIcon />,
+      href: "/perfil",
+      text: "Cuenta",
+      icon: <AccountCircleIcon />,
    },
 ];
 

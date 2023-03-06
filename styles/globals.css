@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mr+De+Haviland&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -73,4 +73,7 @@
 
 .font-play-fair {
    font-family: "Playfair Display", serif;
+}
+.font-haviland {
+   font-family: "Mr De Haviland", cursive;
 }
