@@ -21,7 +21,7 @@ function Card({ product }: CardProps) {
 
    return (
       <Link
-         href={`/product/${product.handle}`}
+         href={`/products/${product.handle}`}
          className="relative flex flex-col w-full p-2 bg-white rounded drop-shadow"
       >
          <Image

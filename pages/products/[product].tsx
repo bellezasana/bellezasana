@@ -36,10 +36,10 @@ function Product() {
    const router = useRouter();
 
    useEffect(() => {
-      if (router.asPath === "/product/[product]") return;
-      console.log(router.asPath);
+      if (router.asPath === "/products/[product]") return;
+      // console.log(router.asPath);
       const fetchProduct = async () => {
-         const basePath = "/product/";
+         const basePath = "/products/";
          const query = productQuery(router.asPath.substring(basePath.length));
          // const query = ;
          const response = await shopifyAPI(query);
@@ -59,7 +59,7 @@ function Product() {
       <div className="flex flex-col items-center w-full h-full max-h-[100vh] bg-[#fafafa]">
          <Head>
             <title>{product?.title}</title>
-            <meta name="description" content="Belleza Sana" />
+            <meta name="description" content={product?.description || ""} />
             <meta
                name="viewport"
                content="width=device-width, initial-scale=1"
