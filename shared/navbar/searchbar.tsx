@@ -14,15 +14,17 @@ function Searchbar() {
    return (
       <div
          ref={searchRef}
-         className={`flex items-center h-full max-w-md bg-white  cursor-pointer sm:rounded  sm:mx-auto sm:w-[60%]   drop-shadow-md hover:drop-shadow-lg  sm:aspect-auto ${
-            showSearchInput ? "w-[80%] mx-auto" : " rounded-full aspect-square"
+         className={`flex sm:mx-auto sm:!w-full max-w-[35ch]  items-center sm:h-full  bg-white justify-center  cursor-pointer sm:rounded   drop-shadow-md hover:drop-shadow-lg  sm:aspect-auto ${
+            showSearchInput
+               ? "mx-auto h-full"
+               : "ml-auto rounded-full h-12 aspect-square !w-12"
          }`}
       >
          <SearchIcon className="mx-2 text-gray-700" onClick={toggle} />
          <input
             className={`${
                showSearchInput ? "" : "hidden"
-            }  h-full py-3 outline-none w-fit sm:w-full sm:flex text-[min(16px_1rem)]`}
+            }  !h-full py-3 outline-none w-full sm:flex text-[min(16px_1rem)]`}
             type="text"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}

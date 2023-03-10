@@ -19,22 +19,32 @@ function Navbar() {
    // const toggleSearch = () => setShowSearchInput((show: boolean) => !show);
 
    return (
-      <div ref={navRef} className="fixed w-full  z-[1000]">
-         <div className="relative flex items-center justify-center w-full bg-white drop-shadow">
-            <span className="relative md:flex aspect-square w-[2.5rem] mx-r ml-2 hidden my-2">
-               <Image src="/LogoBellezaSana.png" alt="" fill />
-            </span>
-            <HiMenu
-               className="mx-2 mr-auto text-gray-700 cursor-pointer hover:drop-shadow-lg md:hidden"
-               size="1.7rem"
-               onClick={toggleSidebar}
-            />
-            <Searchbar />
-            <div className={`${showSearchInput ? "hidden" : "flex"} sm:flex`}>
-               <ShoppingCart />
-               <Account />
-            </div>
-         </div>
+      <div
+         ref={navRef}
+         className="fixed z-[1000]  flex w-screen h-14 overflow-hidden drop-shadow bg-white items-center"
+      >
+         <Image
+            src="/LogoBellezaSana.png"
+            alt=""
+            fill
+            className="!relative hidden md:flex !aspect-square !w-fit  mx-2"
+         />
+         <HiMenu
+            className="mx-2 my-auto text-gray-700 cursor-pointer hover:drop-shadow-lg md:hidden"
+            size="1.7rem"
+            onClick={toggleSidebar}
+         />
+         <Searchbar />
+         {/* <div
+               className={`${
+                  showSearchInput ? "hidden" : "flex "
+               } sm:flex bg-red-400 min-h-full  `}
+            > */}
+         {/* <div className="relative flex !w-fit bg-red-400 "> */}
+         <ShoppingCart />
+         <Account />
+         {/* </div> */}
+         {/* </div> */}
       </div>
    );
 }

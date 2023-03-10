@@ -107,6 +107,20 @@ export const checkoutCreate = (email: string) => {
     }
     `;
 };
+export const checkoutCreateForSingleProduct = async (
+   variantID: string,
+   quantity: number
+) => {
+   return `
+   checkoutCreate(buyerIdentity: {countryCode: CO}, lineItems: {quantity: ${quantity}, variantId: "${variantID}"}){
+      checkout{
+         id
+         webUrl
+      }
+
+   }
+`;
+};
 
 export const checkoutLineItemAdd = (
    checkoutId: string,

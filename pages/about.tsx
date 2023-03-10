@@ -18,7 +18,7 @@ function About() {
             <div className="my-8 border-b-2 border-white">
                <h1 className="font-medium font-haviland text-8xl">Nosotros</h1>
             </div>
-            <div className="flex flex-col max-w-xl gap-4 mb-8 font-thin">
+            <div className="flex flex-col max-w-xl gap-4 px-4 mb-8 font-thin">
                <p>
                   ¡Somos una empresa nueva fundada en 2023, queremos impulsar la
                   belleza, el cuidado del cuerpo y al mismo tiempo fomentarla

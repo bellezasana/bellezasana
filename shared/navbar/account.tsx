@@ -24,22 +24,25 @@ function Account() {
    };
 
    return (
-      <div>
+      <>
          <span
             ref={accIconRef}
             onClick={handleClick}
-            className="flex aspect-square ml-1 mr-4 bg-white rounded-full drop-shadow-md h-[2.5rem] items-center justify-center cursor-pointer hover:drop-shadow-lg overflow-hidden"
+            className="flex items-center justify-center  overflow-hidden bg-white rounded-full cursor-pointer !aspect-square drop-shadow-md hover:drop-shadow-lg  min-w-max mr-1 !h-12"
          >
             {currentUser?.photoURL && currentUser?.photoURL !== "" ? (
-               <span className="relative flex w-full aspect-square">
-                  <Image src={currentUser.photoURL} alt="" fill />
-               </span>
+               <Image
+                  src={currentUser.photoURL}
+                  alt=""
+                  fill
+                  className="!relative !aspect-square flex !w-12 "
+               />
             ) : (
-               <PersonIcon className="text-gray-700" />
+               <PersonIcon className="text-gray-700 " />
             )}
          </span>
          {showDropdown && <AccDropdown />}
-      </div>
+      </>
    );
 }
 

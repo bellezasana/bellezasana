@@ -25,10 +25,10 @@ function ShoppingCart() {
    }, [accessToken, setCheckoutSession]);
 
    return (
-      <div className="relative">
+      <div className="relative flex h-12 !aspect-square mx-1">
          <Link
             href="/cart"
-            className="flex aspect-square ml-1 bg-white rounded-full drop-shadow-md h-[2.5rem] items-center justify-center cursor-pointer hover:drop-shadow-lg "
+            className="flex items-center justify-center !min-h-full  bg-white rounded-full cursor-pointer !aspect-square drop-shadow-md hover:drop-shadow-lg "
          >
             <ShoppingCartIcon className="flex text-gray-700" />
          </Link>

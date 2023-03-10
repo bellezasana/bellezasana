@@ -27,7 +27,7 @@ function OrderNumber() {
    return (
       <div className="w-full flex flex-col items-center h-full max-h-[100vh] overflow-hidden  ">
          <Head>
-            <title>Carrito de compras</title>
+            <title>Order</title>
             <meta name="description" content="Belleza Sana" />
             <meta
                name="viewport"

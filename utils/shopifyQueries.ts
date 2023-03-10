@@ -407,3 +407,46 @@ export const searchProductsQuery = (query: string) => {
     }
   `;
 };
+export const orderNodeQuery = (orderId: string) => {
+   return `
+      node(id: "${orderId}") {
+        ... on Order {
+          id
+          name
+          totalPriceV2 {
+            amount
+            currencyCode
+          }
+          processedAt
+          lineItems(first: 10) {
+            edges {
+              node {
+                
+                title
+                variant {
+                  product {
+                    handle
+                  }
+                  id
+                  title
+                  image {
+                    src
+                  }
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
+                  unitPrice {
+                    amount
+                    currencyCode
+                  }
+                  availableForSale
+                }
+                quantity
+              }
+            }
+          }
+        }
+      }
+    `;
+};

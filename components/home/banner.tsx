@@ -3,12 +3,12 @@ import React from "react";
 
 function Banner() {
    return (
-      <div className="flex items-center justify-center w-full my-14">
+      <div className="flex items-center justify-center w-full mb-14">
          <Image
             src="/BellezaSanaCover.png"
             alt=""
             fill
-            className="!relative w-full !max-w-3xl drop-shadow-md"
+            className="!relative w-full drop-shadow-md"
          />
       </div>
    );
