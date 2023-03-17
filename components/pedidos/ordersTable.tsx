@@ -1,6 +1,6 @@
 import { useAuth } from "@/context/authContext";
 import { shopifyAPI } from "@/utils/shopifyAPI";
-import { ordersQueryWithCursorNoLineItems } from "@/utils/shopifyQueries";
+// import { ordersQueryWithCursorNoLineItems } from "@/utils/shopifyQueries";
 import React, { useState, useEffect } from "react";
 import NoOrders from "./noOrders";
 import OrderItem from "./orderItem";
@@ -30,19 +30,19 @@ function OrdersTable() {
       }
 
       const getOrders = async () => {
-         const ordersResponse = await shopifyAPI(
-            ordersQueryWithCursorNoLineItems(accessToken)
-         );
+         // const ordersResponse = await shopifyAPI(
+         //    ordersQueryWithCursorNoLineItems(accessToken)
+         // );
          // console.log(ordersResponse.data.customer.orders);
 
-         const totalCount =
-            Number(ordersResponse?.data?.customer?.orders?.totalCount) || 0;
-         if (totalCount === 0) return;
-         setOrders(
-            ordersResponse.data.customer.orders.edges.map(
-               (order: any) => order.node
-            )
-         );
+         // const totalCount =
+         //    Number(ordersResponse?.data?.customer?.orders?.totalCount) || 0;
+         // if (totalCount === 0) return;
+         // setOrders(
+         //    ordersResponse.data.customer.orders.edges.map(
+         //       (order: any) => order.node
+         //    )
+         // );
          setShowOrders(true);
       };
       getOrders();
