@@ -15,6 +15,7 @@ interface CartProductProps {
          src: string;
       };
       variant: {
+         title: string;
          id: string;
          image: {
             src: string;
@@ -64,7 +65,7 @@ function CartProduct({ product }: CartProductProps) {
    return (
       <div className="relative flex flex-col items-center justify-center w-full p-2 mb-2 bg-white rounded drop-shadow lg:flex-row">
          <Link
-            href={`/product/${product.variant.product?.handle}`}
+            href={`/products/${product.variant.product?.handle}`}
             className="flex items-center justify-center w-full"
          >
             <Image
@@ -73,13 +74,13 @@ function CartProduct({ product }: CartProductProps) {
                fill
                className="!relative !h-auto  !w-[7rem] !aspect-square"
             />
-
-            <p className="w-full text-sm font-semibold text-center ">
-               {product.title}
-            </p>
+            <span className="w-full pl-0 lg:pl-8">
+               <p className="text-sm font-semibold ">{product.title}</p>
+               <p>{product.variant.title}</p>
+            </span>
          </Link>
          <div className="flex items-center ">
-            <span className="flex items-center px-3 ml-4 mr-2 bg-white rounded drop-shadow-md">
+            <span className="flex items-center px-3 ml-4 mr-2 bg-white rounded-full drop-shadow-md">
                <button
                   className={`text-2xl font-bold ${
                      loading ? "text-gray-600" : "text-blue-400"

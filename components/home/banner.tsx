@@ -8,7 +8,7 @@ function Banner() {
             src="/BellezaSanaCover.png"
             alt=""
             fill
-            className="!relative w-full drop-shadow-md"
+            className="!relative max-w-4xl mt-16 drop-shadow-md"
          />
       </div>
    );

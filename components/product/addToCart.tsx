@@ -1,6 +1,5 @@
 import { useAuth } from "@/context/authContext";
 import { addProductToCheckout } from "@/utils/shopifyMutations";
-import { getCheckoutSession } from "@/utils/shopifyQueries";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
@@ -10,8 +9,7 @@ interface AddToCartProps {
 }
 
 function AddToCart({ productId, quantity = 1 }: AddToCartProps) {
-   const { checkoutSession, currentUser, updateCheckoutSession, accessToken } =
-      useAuth();
+   const { checkoutSession, currentUser, updateCheckoutSession } = useAuth();
    const router = useRouter();
    const [loading, setLoading] = useState(false);
 
@@ -22,10 +20,7 @@ function AddToCart({ productId, quantity = 1 }: AddToCartProps) {
          router.push(url);
          return;
       }
-      // setLoading(true);
-      // console.log(checkoutSession.id, productId, quantity, currentUser.email);
-
-      // console.log(accessToken);
+      setLoading(true);
 
       if (!checkoutSession) {
          await updateCheckoutSession();
@@ -40,12 +35,11 @@ function AddToCart({ productId, quantity = 1 }: AddToCartProps) {
 
       await updateCheckoutSession();
       setLoading(false);
-      // console.log(response);
    };
    return (
       <button
          onClick={addProduct}
-         className="px-8 py-2 mt-4 rounded bg-beige drop-shadow"
+         className="px-8 py-2 mt-4 rounded-full bg-beige drop-shadow"
       >
          Agregar al carrito
       </button>

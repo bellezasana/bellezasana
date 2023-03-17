@@ -11,7 +11,7 @@ function CartProducts({ products }: any) {
    // }, [checkoutSession]);
 
    return (
-      <div className="flex flex-col items-center justify-center w-full max-w-4xl mt-2">
+      <div className="flex flex-col items-center justify-center w-full max-w-4xl px-2 mt-2">
          {products.map((product: any) => (
             <CartProduct key={product.id} product={product} />
          ))}
