@@ -1,7 +1,7 @@
 import { useAuth } from "@/context/authContext";
 import Layout from "@/shared/layout";
 import { shopifyAPI } from "@/utils/shopifyAPI";
-import { getOrderByNumber } from "@/utils/shopifyQueries";
+// import { getOrderByNumber } from "@/utils/shopifyQueries";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
@@ -15,11 +15,11 @@ function OrderNumber() {
          const { orderNumber } = router.query;
          if (!orderNumber || typeof orderNumber !== "string") return;
 
-         const order = await shopifyAPI(
-            getOrderByNumber(accessToken, orderNumber)
-         );
-         console.log(order);
-         setOrder(order);
+         // const order = await shopifyAPI(
+         //    getOrderByNumber(accessToken, orderNumber)
+         // );
+         // console.log(order);
+         // setOrder(order);
       };
       getOrder();
    }, [accessToken, router]);
