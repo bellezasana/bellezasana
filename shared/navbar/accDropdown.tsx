@@ -18,7 +18,7 @@ function AccDropdown() {
    return (
       <div
          ref={dropRef}
-         className="absolute bg-white rounded-sm top-full right-2 drop-shadow "
+         className="absolute bg-white rounded-sm top-full right-2 drop-shadow z-[9999]"
       >
          {currentUser && (
             <div className="p-2 text-sm bg-white rounded drop-shadow-lg">

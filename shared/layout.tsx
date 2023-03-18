@@ -10,7 +10,7 @@ function Layout({ children }: { children: React.ReactNode }) {
          <Navbar />
          <div className="flex w-full h-[100vh] overflow-hidden">
             <Sidebar />
-            <div className="flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll mt-14">
+            <div className="flex flex-col items-center w-full overflow-x-hidden overflow-y-scroll mt-28 sm:mt-14">
                <div className="flex flex-col items-center flex-1 w-full mb-12">
                   {children}
                </div>

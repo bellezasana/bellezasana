@@ -10,10 +10,6 @@ import React, {
 } from "react";
 
 interface NavContextProps {
-   setShowCartAlert: Dispatch<SetStateAction<boolean>>;
-   showCartAlert: boolean;
-   setShowSearchInput: Dispatch<SetStateAction<boolean>>;
-   showSearchInput: boolean;
    setShowSideBar: Dispatch<SetStateAction<boolean>>;
    showSideBar: boolean;
    setShowDropdown: Dispatch<SetStateAction<boolean>>;
@@ -34,10 +30,8 @@ export function useNav() {
 }
 
 export function NavProvider({ children }: { children: ReactNode }) {
-   const [showSearchInput, setShowSearchInput] = useState(false);
    const [showSideBar, setShowSideBar] = useState(false);
    const [showDropdown, setShowDropdown] = useState(false);
-   const [showCartAlert, setShowCartAlert] = useState(false);
    const [products, setProducts] = useState();
    const [searchInput, setSearchInput] = useState("");
    const navRef = useRef(null);
@@ -45,10 +39,6 @@ export function NavProvider({ children }: { children: ReactNode }) {
    const cartIconRef = useRef(null);
 
    const value = {
-      setShowCartAlert,
-      showCartAlert,
-      setShowSearchInput,
-      showSearchInput,
       setShowSideBar,
       showSideBar,
       setShowDropdown,

@@ -41,7 +41,7 @@ function Sidebar() {
             showSideBar ? "flex" : "hidden"
          } fixed md:relative `}
       >
-         <ul className="relative flex flex-col h-full max-w-sm overflow-hidden">
+         <ul className="relative flex flex-col h-full max-w-sm overflow-hidden ">
             {navbarItems.map((item) => (
                <SidebarItem
                   key={item.href}

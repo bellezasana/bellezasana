@@ -13,10 +13,10 @@ interface SidebarItemProps {
 function SidebarItem({ item, asPath }: SidebarItemProps) {
    let match = item.href === asPath;
    return (
-      <li className=" last:mb-2 last:mt-auto first:mt-14">
+      <li className="first:mt-28 first:sm:mt-14 last:mb-2 last:mt-auto">
          <Link
             href={item.href}
-            className={`flex items-center w-full py-2 pl-3 pr-9 leading-4  rounded  ${
+            className={`flex items-center text-lg w-full py-2 pl-3 pr-10   ${
                match && "bg-[#f5f5f5]"
             }`}
          >

@@ -7,44 +7,38 @@ import ShoppingCart from "./cart";
 import Searchbar from "./searchbar";
 
 function Navbar() {
-   const {
-      showSideBar,
-      setShowSideBar,
-      navRef,
-      setShowSearchInput,
-      showSearchInput,
-   } = useNav();
+   const { setShowSideBar, navRef } = useNav();
 
    const toggleSidebar = () => setShowSideBar((show: boolean) => !show);
-   // const toggleSearch = () => setShowSearchInput((show: boolean) => !show);
 
    return (
       <div
          ref={navRef}
-         className="fixed z-[1000]  flex w-screen h-14  drop-shadow bg-white items-center"
+         className="fixed z-[1000] flex flex-col w-screen  drop-shadow bg-white  "
       >
-         <Image
-            src="/LogoBellezaSana.png"
-            alt=""
-            fill
-            className="!relative hidden md:flex !aspect-square !w-fit  mx-2"
-         />
-         <HiMenu
-            className="mx-2 my-auto text-gray-700 cursor-pointer hover:drop-shadow-lg md:hidden"
-            size="1.7rem"
-            onClick={toggleSidebar}
-         />
-         <Searchbar />
-         {/* <div
-               className={`${
-                  showSearchInput ? "hidden" : "flex "
-               } sm:flex bg-red-400 min-h-full  `}
-            > */}
-         {/* <div className="relative flex !w-fit bg-red-400 "> */}
-         <ShoppingCart />
-         <Account />
-         {/* </div> */}
-         {/* </div> */}
+         <div className="relative flex items-center w-screen h-14">
+            <Image
+               src="/LogoBellezaSana.png"
+               alt=""
+               fill
+               className="!relative hidden md:flex !aspect-square !w-fit  mx-2"
+            />
+            <HiMenu
+               className="mx-2 my-auto text-gray-700 cursor-pointer hover:drop-shadow-lg md:hidden"
+               size="1.7rem"
+               onClick={toggleSidebar}
+            />
+
+            <span className="hidden w-full sm:flex max-w-[35ch] mx-auto">
+               <Searchbar />
+            </span>
+
+            <ShoppingCart />
+            <Account />
+         </div>
+         <div className="w-full px-4 pb-2 h-14 sm:hidden">
+            <Searchbar />
+         </div>
       </div>
    );
 }

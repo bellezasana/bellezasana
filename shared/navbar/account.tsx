@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import { useAuth } from "@/context/authContext";
 import Image from "next/image";
 import { useNav } from "@/context/navContext";
 import { useRouter } from "next/router";
-import { auth } from "@/utils/firebaseConfig";
 import AccDropdown from "./accDropdown";
 
 function Account() {
@@ -17,10 +16,8 @@ function Account() {
          let url = `/auth/login?src=${encodeURIComponent(router.asPath)}`;
 
          router.push(url);
-         // router.push("/auth/login");
          return;
       }
-      // console.log(showDropdown);
 
       setShowDropdown((show: boolean) => !show);
    };
