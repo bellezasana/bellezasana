@@ -1,33 +1,52 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+   createContext,
+   useContext,
+   useState,
+   useEffect,
+   ReactNode,
+   Context,
+} from "react";
 import {
    createUserWithEmailAndPassword,
-   deleteUser,
    signInWithEmailAndPassword,
    signInWithPopup,
    signOut,
    updateProfile,
 } from "firebase/auth";
-import { auth, db, googleProvider } from "@/utils/firebaseConfig";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { auth, googleProvider } from "@/utils/firebaseConfig";
 import {
    createCustomer,
-   customerAccessTokenCreate,
    getCustomerAccessToken,
 } from "@/utils/shopifyMutations";
-import { shopifyAPI } from "@/utils/shopifyAPI";
-import {
-   checkoutQuery,
-   customerQuery,
-   getCheckoutSession,
-} from "@/utils/shopifyQueries";
+import { getCheckoutSession } from "@/utils/shopifyQueries";
 
-const AuthContext = createContext<any>(null);
-
-export function useAuth() {
-   return useContext(AuthContext);
+interface AuthContextProps {
+   setCheckoutSession: (session: any) => void;
+   loginWithGoogle: () => Promise<unknown>;
+   createUserWithEmail: (
+      email: string,
+      password: string,
+      name: string
+   ) => Promise<string | void>;
+   signInWithEmail: (email: string, password: string) => Promise<string | void>;
+   logout: () => Promise<void>;
+   updateCheckoutSession: () => Promise<void>;
+   currentUser: any;
+   setCurrentUser: (user: any) => void;
+   user: any;
+   setUser: (user: any) => void;
+   accessToken: string;
+   setAccessToken: (token: string) => void;
+   checkoutSession: any;
 }
 
-export function AuthProvider({ children }: any) {
+const AuthContext = createContext<AuthContextProps | null>(null);
+
+export function useAuth() {
+   return useContext(AuthContext as Context<AuthContextProps>);
+}
+
+export function AuthProvider({ children }: { children: ReactNode }) {
    const [currentUser, setCurrentUser] = useState<any>();
    const [user, setUser] = useState();
    const [loaded, setLoaded] = useState(false);
@@ -84,21 +103,6 @@ export function AuthProvider({ children }: any) {
    async function updateCheckoutSession() {
       const session = await getCheckoutSession(accessToken);
       setCheckoutSession(session);
-   }
-
-   async function setUserDoc() {
-      const userRef = doc(db, "users", currentUser.uid);
-
-      const userSnap = await getDoc(userRef);
-
-      if (userSnap.exists()) return;
-
-      await setDoc(userRef, {
-         name: currentUser.displayName || "",
-         email: currentUser.email,
-         photoURL: currentUser.photoURL,
-         lastSeen: serverTimestamp(),
-      });
    }
 
    useEffect(() => {

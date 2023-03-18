@@ -20,6 +20,8 @@ function Account() {
          // router.push("/auth/login");
          return;
       }
+      // console.log(showDropdown);
+
       setShowDropdown((show: boolean) => !show);
    };
 
@@ -28,7 +30,7 @@ function Account() {
          <span
             ref={accIconRef}
             onClick={handleClick}
-            className="flex items-center justify-center  overflow-hidden bg-white rounded-full cursor-pointer !aspect-square drop-shadow-md hover:drop-shadow-lg  min-w-max mr-1 !h-12"
+            className="flex items-center justify-center relative  overflow-hidden bg-white rounded-full cursor-pointer !aspect-square drop-shadow-md hover:drop-shadow-lg  min-w-max mr-1 !h-12"
          >
             {currentUser?.photoURL && currentUser?.photoURL !== "" ? (
                <Image

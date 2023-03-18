@@ -63,9 +63,40 @@ const productNode = `
   }
 `;
 
-export const searchProductsQuery = (query: string) => {
+export const searchProductsQueryWithCursor = (
+   query: string,
+   quantity: number,
+   cursor: string
+) => {
+   let qty = Math.max(quantity, 1);
+
+   return `{
+      products(first: ${qty}, query: "${query}", after: "${cursor}") {
+        edges {
+          cursor
+          node {
+            ${productNode}
+          }
+        }
+        pageInfo {
+          endCursor
+          hasPreviousPage
+          hasNextPage
+          startCursor
+        }
+      }
+    }`;
+};
+
+export const searchProductsQuery = (
+   query: string,
+   quantity: number,
+   after: string | null = null
+) => {
    return `
-    products(first: 10, query: "${query}") {
+    products(first: ${quantity}, query: "${query}", after: ${
+      after ? `"${after}"` : null
+   }) {
       edges {
         cursor
         node {
@@ -78,7 +109,7 @@ export const searchProductsQuery = (query: string) => {
         hasNextPage
         startCursor
       }
-  }`;
+    }`;
 };
 export const productQuery = (handle: string) => {
    return `

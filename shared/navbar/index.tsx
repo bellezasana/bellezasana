@@ -21,7 +21,7 @@ function Navbar() {
    return (
       <div
          ref={navRef}
-         className="fixed z-[1000]  flex w-screen h-14 overflow-hidden drop-shadow bg-white items-center"
+         className="fixed z-[1000]  flex w-screen h-14  drop-shadow bg-white items-center"
       >
          <Image
             src="/LogoBellezaSana.png"

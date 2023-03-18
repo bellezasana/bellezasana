@@ -14,7 +14,7 @@ function Searchbar() {
    return (
       <div
          ref={searchRef}
-         className={`flex sm:mx-auto sm:!w-full max-w-[35ch]  items-center sm:h-full  bg-white justify-center  cursor-pointer sm:rounded   drop-shadow-md hover:drop-shadow-lg  sm:aspect-auto ${
+         className={`flex sm:mx-auto sm:!w-full max-w-[35ch]  items-center sm:h-full  bg-white justify-center  cursor-pointer sm:rounded border-l-2 border-r-2 border-gray-200  sm:aspect-auto ${
             showSearchInput
                ? "mx-auto h-full"
                : "ml-auto rounded-full h-12 aspect-square !w-12"

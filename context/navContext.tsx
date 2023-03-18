@@ -1,19 +1,45 @@
-import React, { createContext, useContext, useRef, useState } from "react";
+import React, {
+   createContext,
+   useContext,
+   useRef,
+   useState,
+   ReactNode,
+   Dispatch,
+   SetStateAction,
+   Context,
+} from "react";
 
-const NavContext = createContext<any>(null);
-
-export function useNav() {
-   return useContext(NavContext);
+interface NavContextProps {
+   setShowCartAlert: Dispatch<SetStateAction<boolean>>;
+   showCartAlert: boolean;
+   setShowSearchInput: Dispatch<SetStateAction<boolean>>;
+   showSearchInput: boolean;
+   setShowSideBar: Dispatch<SetStateAction<boolean>>;
+   showSideBar: boolean;
+   setShowDropdown: Dispatch<SetStateAction<boolean>>;
+   showDropdown: boolean;
+   navRef: React.RefObject<HTMLDivElement>;
+   accIconRef: React.RefObject<HTMLDivElement>;
+   cartIconRef: React.RefObject<HTMLDivElement>;
+   setProducts: Dispatch<SetStateAction<any>>;
+   products: any;
+   setSearchInput: Dispatch<SetStateAction<string>>;
+   searchInput: string;
 }
 
-export function NavProvider({ children }: any) {
+const NavContext = createContext<NavContextProps | null>(null);
+
+export function useNav() {
+   return useContext(NavContext as Context<NavContextProps>);
+}
+
+export function NavProvider({ children }: { children: ReactNode }) {
    const [showSearchInput, setShowSearchInput] = useState(false);
    const [showSideBar, setShowSideBar] = useState(false);
    const [showDropdown, setShowDropdown] = useState(false);
    const [showCartAlert, setShowCartAlert] = useState(false);
    const [products, setProducts] = useState();
    const [searchInput, setSearchInput] = useState("");
-   // const [checkoutSession, setCheckoutSession] = useState();
    const navRef = useRef(null);
    const accIconRef = useRef(null);
    const cartIconRef = useRef(null);
@@ -34,8 +60,6 @@ export function NavProvider({ children }: any) {
       products,
       setSearchInput,
       searchInput,
-      // setCheckoutSession,
-      // checkoutSession,
    };
 
    return <NavContext.Provider value={value}>{children}</NavContext.Provider>;

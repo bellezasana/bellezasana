@@ -1,19 +1,25 @@
 import { useProduct } from "@/context/productContext";
 import { Product } from "@/utils/products";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 function ProductImages({ product }: { product: Product }) {
    const { image, setImage } = useProduct();
 
+   useEffect(() => {
+      setImage(product.featuredImage);
+   }, [product, setImage]);
+
    return (
       <div className="flex flex-col items-center w-full">
-         <Image
-            src={image || product.featuredImage}
-            alt=""
-            fill
-            className="!relative !w-[50%]  !h-auto  !aspect-square "
-         />
+         <span className="h-[40vw] !aspect-square ">
+            <Image
+               src={image || product.featuredImage}
+               alt=""
+               fill
+               className="!relative h-full !w-auto mx-auto "
+            />
+         </span>
          <span className="flex flex-wrap justify-center w-full">
             {product.images.length > 1 &&
                product.images.map((image) => (

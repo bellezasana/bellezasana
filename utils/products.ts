@@ -87,15 +87,33 @@ export const formatShopifyVariant = (variant: any) => {
    });
 };
 
-export const searchProducts = async (query: string) => {
-   const shopifyResponse = await shopifyAPI(searchProductsQuery(query));
+export const searchProducts = async (
+   query: string,
+   quantity: number,
+   cursor: string | null = null
+) => {
+   const shopifyResponse = await shopifyAPI(
+      searchProductsQuery(query, quantity, cursor)
+   );
    // console.log(shopifyResponse);
 
    const shopifyProducts: Product[] =
       shopifyResponse?.data?.products?.edges?.map((product: any) =>
          formatShopifyProduct(product.node)
       ) || [];
-   return [...shopifyProducts];
+   const hasNextPage = shopifyResponse?.data?.products?.pageInfo?.hasNextPage;
+   const endCursor = shopifyResponse?.data?.products?.pageInfo?.endCursor;
+   const startCursor = shopifyResponse?.data?.products?.pageInfo?.startCursor;
+   const hasPreviousPage =
+      shopifyResponse?.data?.products?.pageInfo?.hasPreviousPage;
+
+   return {
+      products: [...shopifyProducts],
+      hasNextPage,
+      endCursor,
+      startCursor,
+      hasPreviousPage,
+   };
 };
 
 export const getProduct = async (handle: string) => {

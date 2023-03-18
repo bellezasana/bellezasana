@@ -62,31 +62,33 @@ function ProfilePhoto() {
    }, [image, currentUser, setCurrentUser]);
 
    return (
-      <div className="flex items-center w-full max-w-md my-2">
-         <div className="w-[4rem] rounded-full overflow-hidden">
+      <div className="flex flex-col items-center w-full ">
+         <div className="mb-4 overflow-hidden rounded-full !aspect-square w-[15rem]">
             {currentUser.photoURL && currentUser.photoURL !== "" ? (
                <Image
                   src={currentUser.photoURL}
                   alt="Foto de perfil"
                   fill
-                  className="!relative w-full"
+                  className="!relative w-full h-full"
                />
             ) : (
                <PersonIcon className="text-gray-700" />
             )}
          </div>
-         <label className="px-6 py-1 mx-2 text-gray-100 rounded cursor-pointer bg-green-dark hover:drop-shadow-md">
-            <input
-               className="hidden"
-               type="file"
-               accept="image/*"
-               onChange={imageHandler}
-            />
-            Agregar foto
-         </label>
-         <button onClick={deleteImage} className="hover:text-red-500">
-            Eliminar foto
-         </button>
+         <div className="flex whitespace-nowrap">
+            <label className="px-6 py-1 mr-2 text-gray-100 rounded cursor-pointer bg-green-dark hover:drop-shadow-md">
+               <input
+                  className="hidden"
+                  type="file"
+                  accept="image/*"
+                  onChange={imageHandler}
+               />
+               Agregar foto
+            </label>
+            <button onClick={deleteImage} className="hover:text-red-500">
+               Eliminar foto
+            </button>
+         </div>
       </div>
    );
 }

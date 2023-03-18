@@ -4,22 +4,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Link from "next/link";
 import { useNav } from "@/context/navContext";
 import { useClickOutside } from "@/utils/useClickOutside";
-
-const dropdownItems = [
-   {
-      text: "Cuenta",
-      icon: <AccountCircleIcon />,
-      link: "/perfil",
-   },
-   {
-      text: "Cerrar Sesion",
-      icon: <LogoutIcon />,
-      link: "/auth/logout",
-   },
-];
+import { useAuth } from "@/context/authContext";
 
 function AccDropdown() {
    const { setShowDropdown, accIconRef } = useNav();
+   const { currentUser, logout } = useAuth();
 
    const dropRef = useRef<HTMLDivElement>(null);
 
@@ -29,22 +18,29 @@ function AccDropdown() {
    return (
       <div
          ref={dropRef}
-         className="absolute right-2 bottom-[-5rem] bg-white rounded-sm drop-shadow z-50"
+         className="absolute bg-white rounded-sm top-full right-2 drop-shadow "
       >
-         <ul>
-            {dropdownItems.map((item) => (
-               <li
-                  key={item.text}
-                  onClick={closeDropdown}
-                  className="flex items-center hover:bg-[#f5f5f5] px-2"
-               >
-                  <span className="text-gray-700">{item.icon}</span>
-                  <Link className="p-2" href={item.link}>
-                     {item.text}
+         {currentUser && (
+            <div className="p-2 text-sm bg-white rounded drop-shadow-lg">
+               <div>
+                  <p className="text-base font-medium">
+                     {currentUser?.displayName || currentUser?.email}
+                  </p>
+               </div>
+               <div className="flex flex-col pt-2 mt-2 text-blue-700 border-t-2">
+                  <Link className="hover:underline" href={`/perfil`}>
+                     Perfil
                   </Link>
-               </li>
-            ))}
-         </ul>
+
+                  <button
+                     onClick={logout}
+                     className="text-start hover:underline"
+                  >
+                     Cerrar Sesion
+                  </button>
+               </div>
+            </div>
+         )}
       </div>
    );
 }

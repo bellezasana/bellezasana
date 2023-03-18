@@ -23,7 +23,9 @@ export default function Home() {
          <Layout>
             <Banner />
             <EachPurchase />
-            <Products />
+            <div className="lg:px-10">
+               <Products />
+            </div>
          </Layout>
       </div>
    );

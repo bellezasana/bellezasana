@@ -7,7 +7,9 @@ import EachPurchase from "./eachPurchase";
 function HomeContent() {
    return (
       <div className="flex flex-col items-center w-full mt-16 overflow-x-hidden overflow-y-scroll">
-         <Products />
+         <div className="flex max-w-xl overflow-hidden bg-red-400">
+            {/* <Products /> */}
+         </div>
          <EachPurchase />
          <Banner />
          <Footer />

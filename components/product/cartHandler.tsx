@@ -63,7 +63,7 @@ function ProductCartHandler() {
       setShowButton(true);
    }, [checkoutSession, product, router, setSelectedVariant, setShowButton]);
 
-   if (showButton) return <AddToCart productId={variantId} />;
+   if (showButton || !lineItem) return <AddToCart productId={variantId} />;
 
    return <ProductQuantity item={lineItem} />;
 }
