@@ -14,7 +14,7 @@ function RegisterForm() {
    const [inputName, setInputName] = useState("");
    const [email, setEmail] = useState("");
    const [error, setError] = useState("");
-   const { currentUser, registerUserWithEmailLink, profile } = useAuth();
+   const { currentUser, registerUserWithEmailLink } = useAuth();
    const [routerQuerySrc, setRouterQuerySrc] = useState("");
 
    useEffect(() => {
@@ -44,7 +44,6 @@ function RegisterForm() {
       if (!currentUser) return;
 
       const setProfileInfo = async () => {
-         if (profile) return;
          if (typeof name === "string") {
             await updateProfile(currentUser, { displayName: name });
          }
@@ -52,7 +51,7 @@ function RegisterForm() {
       setProfileInfo();
 
       router.replace(typeof src === "string" ? src : "/");
-   }, [router, currentUser, profile]);
+   }, [router, currentUser]);
 
    const registerUser = async (e: FormEvent) => {
       e.preventDefault();

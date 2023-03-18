@@ -8,7 +8,10 @@ import React, {
 } from "react";
 import {
    createUserWithEmailAndPassword,
+   isSignInWithEmailLink,
+   sendSignInLinkToEmail,
    signInWithEmailAndPassword,
+   signInWithEmailLink,
    signInWithPopup,
    signOut,
    updateProfile,
@@ -38,6 +41,10 @@ interface AuthContextProps {
    accessToken: string;
    setAccessToken: (token: string) => void;
    checkoutSession: any;
+   registerUserWithEmailLink: (
+      email: string,
+      url: string
+   ) => Promise<string | void>;
 }
 
 const AuthContext = createContext<AuthContextProps | null>(null);
@@ -95,6 +102,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
    }
 
+   async function registerUserWithEmailLink(email: string, url: string) {
+      // If the user is re-entering their email address but already has a code
+      if (isSignInWithEmailLink(auth, url) && !!email) {
+         // Sign the user in
+         try {
+            await signInWithEmailLink(auth, email, url);
+         } catch (error) {
+            return console.error(error);
+         }
+         return;
+      }
+
+      try {
+         await sendSignInLinkToEmail(auth, email, {
+            url,
+            handleCodeInApp: true,
+         });
+         window.localStorage.setItem("emailForSignIn", email);
+      } catch (error) {
+         return console.error(error);
+      }
+   }
+
    async function logout() {
       await signOut(auth);
       setAccessToken("");
@@ -141,6 +171,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       checkoutSession,
       setCheckoutSession,
       updateCheckoutSession,
+      registerUserWithEmailLink,
    };
 
    return (
