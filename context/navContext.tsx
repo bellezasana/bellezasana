@@ -21,6 +21,8 @@ interface NavContextProps {
    products: any;
    setSearchInput: Dispatch<SetStateAction<string>>;
    searchInput: string;
+   setShowSearchInput: Dispatch<SetStateAction<boolean>>;
+   showSearchInput: boolean;
 }
 
 const NavContext = createContext<NavContextProps | null>(null);
@@ -30,6 +32,7 @@ export function useNav() {
 }
 
 export function NavProvider({ children }: { children: ReactNode }) {
+   const [showSearchInput, setShowSearchInput] = useState(false);
    const [showSideBar, setShowSideBar] = useState(false);
    const [showDropdown, setShowDropdown] = useState(false);
    const [products, setProducts] = useState();
@@ -50,6 +53,8 @@ export function NavProvider({ children }: { children: ReactNode }) {
       products,
       setSearchInput,
       searchInput,
+      setShowSearchInput,
+      showSearchInput,
    };
 
    return <NavContext.Provider value={value}>{children}</NavContext.Provider>;

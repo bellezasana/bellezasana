@@ -6,10 +6,6 @@ import React, { useEffect } from "react";
 function ProductImages({ product }: { product: Product }) {
    const { image, setImage } = useProduct();
 
-   useEffect(() => {
-      setImage(product.featuredImage);
-   }, [product, setImage]);
-
    return (
       <div className="flex flex-col items-center w-full">
          <span className="h-[40vw] !aspect-square ">

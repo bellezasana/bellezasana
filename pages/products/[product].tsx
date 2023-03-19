@@ -1,13 +1,8 @@
 import ProductContent from "@/components/product";
 import { ProductProvider } from "@/context/productContext";
 import Layout from "@/shared/layout";
-import Navbar from "@/shared/navbar";
-import Sidebar from "@/shared/sidebar";
 import { getProduct, Product } from "@/utils/products";
-// import { shopifyAPI } from "@/utils/shopifyAPI";
-// import { productQuery } from "@/utils/shopifyQueries";
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 

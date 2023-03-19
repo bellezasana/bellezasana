@@ -3,10 +3,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAuth } from "@/context/authContext";
 import { getCheckoutSession } from "@/utils/shopifyQueries";
 import Link from "next/link";
+import { useNav } from "@/context/navContext";
 
 function ShoppingCart() {
    const { currentUser, accessToken, setCheckoutSession, checkoutSession } =
       useAuth();
+   const { showSearchInput } = useNav();
 
    useEffect(() => {
       const loadCheckoutSession = async () => {
@@ -17,7 +19,11 @@ function ShoppingCart() {
    }, [accessToken, setCheckoutSession]);
 
    return (
-      <div className="relative flex h-12 !aspect-square mr-1 ml-auto sm:ml-0">
+      <div
+         className={`relative flex h-12 !aspect-square mr-1 ml-auto sm:ml-0  ${
+            !showSearchInput && "sm:ml-auto"
+         }  `}
+      >
          <Link
             href="/cart"
             className="flex items-center justify-center !min-h-full  bg-white rounded-full cursor-pointer !aspect-square drop-shadow-md hover:drop-shadow-lg "

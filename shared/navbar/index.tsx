@@ -1,13 +1,21 @@
 import { useNav } from "@/context/navContext";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
 import { HiMenu } from "react-icons/hi";
 import Account from "./account";
 import ShoppingCart from "./cart";
 import Searchbar from "./searchbar";
 
 function Navbar() {
-   const { setShowSideBar, navRef } = useNav();
+   const { setShowSideBar, navRef, setShowSearchInput, showSearchInput } =
+      useNav();
+   const router = useRouter();
+
+   useEffect(() => {
+      let show = router.pathname === "/[[...index]]";
+      setShowSearchInput(show);
+   }, [router, setShowSearchInput]);
 
    const toggleSidebar = () => setShowSideBar((show: boolean) => !show);
 
@@ -29,16 +37,20 @@ function Navbar() {
                onClick={toggleSidebar}
             />
 
-            <span className="hidden w-full sm:flex max-w-[35ch] mx-auto">
-               <Searchbar />
-            </span>
+            {showSearchInput && (
+               <span className="hidden w-full sm:flex max-w-[35ch] mx-auto">
+                  <Searchbar />
+               </span>
+            )}
 
             <ShoppingCart />
             <Account />
          </div>
-         <div className="w-full px-4 pb-2 h-14 sm:hidden">
-            <Searchbar />
-         </div>
+         {showSearchInput && (
+            <div className="w-full px-4 pb-2 h-14 sm:hidden ">
+               <Searchbar />
+            </div>
+         )}
       </div>
    );
 }

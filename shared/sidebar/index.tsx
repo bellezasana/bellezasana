@@ -29,7 +29,7 @@ const navbarItems = [
 
 function Sidebar() {
    const router = useRouter();
-   const { showSideBar, setShowSideBar, navRef } = useNav();
+   const { showSideBar, setShowSideBar, navRef, showSearchInput } = useNav();
    const sidebarRef = useRef<HTMLDivElement>(null);
 
    useClickOutside([navRef, sidebarRef], () => setShowSideBar(false));
@@ -37,9 +37,9 @@ function Sidebar() {
    return (
       <div
          ref={sidebarRef}
-         className={`z-[900] h-full max-h-[100vh] bg-white w-fit border-r-2 border-[#eee] md:flex ${
+         className={`fixed z-[900] h-full max-h-[100vh] bg-white w-fit border-r-2 border-[#eee] md:flex md:relative sm:pt-14 ${
             showSideBar ? "flex" : "hidden"
-         } fixed md:relative `}
+         } ${showSearchInput ? "pt-28" : "pt-14"} `}
       >
          <ul className="relative flex flex-col h-full max-w-sm overflow-hidden ">
             {navbarItems.map((item) => (
