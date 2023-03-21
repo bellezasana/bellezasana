@@ -3,12 +3,12 @@ import React from "react";
 
 function Banner() {
    return (
-      <div className="flex items-center justify-center w-full py-16 px-8 bg-[url(/BanerBg.png)] bg-cover">
+      <div className="flex items-center justify-center w-full py-0 bg-cover">
          <Image
-            src="/BellezaSanaCover.png"
+            src="/NewSvg.svg"
             alt=""
             fill
-            className="!relative !w-full !h-auto max-w-3xl drop-shadow-md"
+            className="!relative !w-full !h-auto  drop-shadow-md"
          />
       </div>
    );

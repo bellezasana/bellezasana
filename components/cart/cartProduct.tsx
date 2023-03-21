@@ -68,15 +68,21 @@ function CartProduct({ product }: CartProductProps) {
             href={`/products/${product.variant.product?.handle}`}
             className="flex items-center justify-center w-full"
          >
-            <Image
-               src={product.variant.image.src}
-               alt=""
-               fill
-               className="!relative !h-auto  !w-[7rem] !aspect-square"
-            />
+            <span className="!aspect-square !w-[7rem] flex justify-center ">
+               <Image
+                  src={product.variant.image.src}
+                  alt=""
+                  fill
+                  className="!relative !h-full !w-auto "
+               />
+            </span>
             <span className="w-full pl-0 lg:pl-8">
                <p className="text-sm font-semibold ">{product.title}</p>
-               <p>{product.variant.title}</p>
+               <p>
+                  {product.variant.title === "Default Title"
+                     ? ""
+                     : product.variant.title}
+               </p>
             </span>
          </Link>
          <div className="flex items-center ">

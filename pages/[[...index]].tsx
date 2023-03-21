@@ -8,7 +8,7 @@ export default function Home() {
    return (
       <div className="w-full flex flex-col items-center h-full max-h-[100vh] overflow-hidden bg-[#fafafa] ">
          <Head>
-            <title>Belleza Sana</title>
+            <title>Emoku shop</title>
             <meta name="description" content="Belleza Sana" />
             <meta
                name="viewport"
@@ -20,7 +20,7 @@ export default function Home() {
             <Banner />
             <EachPurchase />
             <div className="lg:px-10">
-               <Products />
+               <Products quantity={12} />
             </div>
          </Layout>
       </div>
